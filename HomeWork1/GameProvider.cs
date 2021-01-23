@@ -14,7 +14,7 @@ namespace HomeWork1
 
             string[] ArrayOfPlayers = new string[QantityOfPlayers];// массив из игроков
 
-           // циккл представления игроков
+           // цикл представления игроков
             for (int counterOfPlayers = 0; counterOfPlayers < QantityOfPlayers; counterOfPlayers++)
             {
                 int numberOfPlayer = counterOfPlayers + 1;
