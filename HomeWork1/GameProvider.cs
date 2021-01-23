@@ -4,13 +4,27 @@ using System.Text;
 
 namespace HomeWork1
 {
-    class GameProvider
+    class GameProvider 
     {
-
-        public void ThePresentaitonOfThePlayers()
+        public void Gameplay()
         {
-            string qantityOfPlayers = Console.ReadLine(); // ввод кол-ва игроков
+            // ввод кол-ва игроков
+            Console.WriteLine("Введите количество игроков:");
+            string qantityOfPlayers = Console.ReadLine();
             int QantityOfPlayers = Convert.ToInt32(qantityOfPlayers);
+
+            //ввод диапазона gameNumber
+            Console.WriteLine("Введите первое число диапазона случайных чисел:");
+            string gameNumberOne = Console.ReadLine();
+            int GameNumberOne = Convert.ToInt32(gameNumberOne);
+
+            Console.WriteLine("Введите второе число диапазона случайных чисел:");
+            string gameNumberTwo = Console.ReadLine();
+            int GameNumberTwo = Convert.ToInt32(gameNumberTwo);
+
+            string askOfReapeat="x";
+            while (askOfReapeat != "Y")
+            {
 
             string[] ArrayOfPlayers = new string[QantityOfPlayers];// массив из игроков
 
@@ -24,29 +38,43 @@ namespace HomeWork1
             }
         
             Random generationRandomValue = new Random();
-            int GenerationRandomValue = generationRandomValue.Next(75, 120);
+            int gameNumber = generationRandomValue.Next(GameNumberOne, GameNumberTwo);
 
-            Console.WriteLine(GenerationRandomValue);
-            int result = GenerationRandomValue;
+            Console.WriteLine(gameNumber);
+            int result = gameNumber;
+            // запуск цикла проверки результата вычитания значения попытки игрока из загаданного числа
             for(;result>0 ; )
             {
-                int CellOfArrayOfPlayers = 0;
-                while ( CellOfArrayOfPlayers<=QantityOfPlayers-1)
+                int CellOfArrayOfPlayers = 0;// ячейка в списке массива имен игроков
+
+                // перебор игроков для осуществления попытки
+                while ( CellOfArrayOfPlayers<= QantityOfPlayers - 1)
                 {
                     if (result == 0 || result<0)
                     {
-                        Console.WriteLine("gameOver");
-                        break;
+                        Console.WriteLine("gameOver \n Реванш? \n Y/N");
+                        askOfReapeat = Console.ReadLine();
+                        if (askOfReapeat == "N")
+                        {
+                            Environment.Exit(0);
+                        }
                     }
                     else
                     {
-                     Console.WriteLine($"сделай попытку {ArrayOfPlayers[CellOfArrayOfPlayers]}");
-                     string userTry = Console.ReadLine();
-                     int UserTry = Convert.ToInt32(userTry);
-                     CellOfArrayOfPlayers++;
-                     result = result - UserTry;
-                     Console.WriteLine(result);
+                            Console.WriteLine($"сделай попытку  {ArrayOfPlayers[CellOfArrayOfPlayers]} от 1 до 4");
+                            string userTry = Console.ReadLine();
+                           int UserTry = Convert.ToInt32(userTry);
+                        while (UserTry<=0 || UserTry > 4)
+                        {
+                            Console.WriteLine($"Неверная попытка {ArrayOfPlayers[CellOfArrayOfPlayers]} введите от 1 до 4");
+                            userTry = Console.ReadLine();
+                            UserTry = Convert.ToInt32(userTry);
+                        }
+                            CellOfArrayOfPlayers++;
+                            result = result - UserTry;
+                            Console.WriteLine(result);
                     }
+            }
                      
                 }
              
